@@ -1,66 +1,78 @@
 "use client";
 
-import axios from "@/lib/axios";
+import { Icons } from "@/components/icons";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import axios from "@/lib/axios";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [shouldRemember, setShouldRemember] = useState(false);
-  const [errors, setErrors] = useState([]);
-  const [status, setStatus] = useState(null);
-  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const [errors, setErrors] = useState<Array<string>>([]);
 
   const csrf = () => axios.get("/sanctum/csrf-cookie");
 
   const handleLogin = async () => {
     await csrf();
 
-    setErrors([]);
-    setStatus(null);
-
     await axios
       .post("/login", {
         email: email,
         password: password,
       })
-      // .then(() => mutate())
       .catch((error) => {
         if (error.response.status !== 422) throw error;
-
         setErrors(error.response.data.errors);
       });
-
-    const { data } = await axios.get("/api/user");
-    setUser(data);
   };
 
+  console.log(errors);
+
   return (
-    <div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-          id="email"
-          className="border border-black"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          id="password"
-          className="border border-black"
-        />
-      </div>
-      <button type="submit" onClick={handleLogin}>
-        Login
-      </button>
-      {user && <div>{JSON.stringify(user)}</div>}
+    <div className="flex justify-center items-center h-screen">
+      <Card>
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">Masuk</CardTitle>
+          <CardDescription>
+            Masukkan email dan password untuk masuk ke akun anda
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button className="w-full" onClick={handleLogin}>
+            Masuk
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
