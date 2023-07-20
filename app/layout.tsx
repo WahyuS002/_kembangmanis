@@ -2,6 +2,8 @@ import Nav from "@/components/nav";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Footer from "@/components/footer";
+import NextTopLoader from "nextjs-toploader";
+import MainLayout from "@/components/main-layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} text-zinc-900`}>
-        <Nav />
-        {children}
-        <Footer />
+        <NextTopLoader color="black" />
+        <MainLayout>{children}</MainLayout>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowLeft } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -19,4 +20,5 @@ export const Icons = {
       />
     </svg>
   ),
+  ArrowLeft: ArrowLeft,
 };
