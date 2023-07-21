@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 export default function Nav() {
   return (
     <nav className="py-10 flex items-center justify-between font-medium container mx-auto">
-      <div>Desa Kembang Manis</div>
+      <Link href="/">Desa Kembang Manis</Link>
       <ul className="flex items-center gap-8">
         <li>
           <Link href="/">Beranda</Link>
