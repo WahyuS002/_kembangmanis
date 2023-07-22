@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Footer from "@/components/footer";
 import NextTopLoader from "nextjs-toploader";
 import MainLayout from "@/components/main-layout";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={`${inter.className} text-zinc-900`}>
         <NextTopLoader color="black" />
         <MainLayout>{children}</MainLayout>
+        <Analytics />
       </body>
     </html>
   );
