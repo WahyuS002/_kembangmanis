@@ -42,7 +42,7 @@ export default function LoginPage() {
     <div className="relative">
       <div className="absolute left-20 top-12">
         <Link href="/" className="flex gap-2 items-center">
-          <Icons.ArrowLeft className="w-5" />
+          <Icons.arrowLeft className="w-5" />
           <span className="text-sm font-medium">Kembali</span>
         </Link>
       </div>

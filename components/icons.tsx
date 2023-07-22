@@ -1,5 +1,12 @@
 import React from "react";
-import { ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  LayoutDashboard,
+  LayoutPanelTop,
+  Image,
+  Newspaper,
+  Users,
+} from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -20,5 +27,10 @@ export const Icons = {
       />
     </svg>
   ),
-  ArrowLeft: ArrowLeft,
+  arrowLeft: ArrowLeft,
+  layoutDashboard: LayoutDashboard,
+  layoutPanelTop: LayoutPanelTop,
+  image: Image,
+  newspaper: Newspaper,
+  users: Users,
 };
