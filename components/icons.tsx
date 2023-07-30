@@ -8,6 +8,7 @@ import {
   Users,
   Plus,
   UploadCloud,
+  PlusCircle,
 } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -37,4 +38,5 @@ export const Icons = {
   users: Users,
   plus: Plus,
   uploadCloud: UploadCloud,
+  plusCircle: PlusCircle,
 };
