@@ -6,6 +6,8 @@ import {
   Image,
   Newspaper,
   Users,
+  Plus,
+  UploadCloud,
 } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -33,4 +35,6 @@ export const Icons = {
   image: Image,
   newspaper: Newspaper,
   users: Users,
+  plus: Plus,
+  uploadCloud: UploadCloud,
 };
