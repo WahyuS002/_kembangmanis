@@ -6,6 +6,7 @@ import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
+import { Separator } from "./ui/separator";
 
 const items = [
   {
@@ -30,9 +31,11 @@ export function Sidebar({ className }: any) {
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
-          <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-            Kembang Manis
-          </h2>
+          <Link href="/">
+            <h2 className="mb-2 px-4 text-2xl font-bold tracking-tight">
+              Kembang Manis
+            </h2>
+          </Link>
           <div className="space-y-1">
             {items.map((item) => (
               <Link
@@ -49,6 +52,13 @@ export function Sidebar({ className }: any) {
                 </Button>
               </Link>
             ))}
+            <Separator className="my-6" />
+            <Link href="#logout" className="flex items-center">
+              <Button variant="ghost" className="w-full justify-start">
+                <Icons.logOut className="h-4 w-4 mr-2" />
+                <span className="capitalize">Logout</span>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
