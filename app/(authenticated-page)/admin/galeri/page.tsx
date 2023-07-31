@@ -32,10 +32,8 @@ export default function AdminGaleriPage() {
         {[...Array(4)].map(() => (
           <div>
             <div className="aspect-square rounded-lg bg-zinc-900" />
-            <p className="text-center mt-4 font-medium">
-              Dokumentasi Kuda Terbang
-            </p>
-            <div className="flex justify-center items-center mt-2">
+            <p className="mt-4 font-medium">Dokumentasi Kuda Terbang</p>
+            <div className="flex items-center mt-2">
               <Icons.image className="w-4 h-4 mr-1 text-zinc-400" />
               <p className="font-semibold text-zinc-400 text-xs">15 Gambar</p>
             </div>
