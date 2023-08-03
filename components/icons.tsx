@@ -10,6 +10,7 @@ import {
   UploadCloud,
   PlusCircle,
   LogOut,
+  Settings,
 } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -41,4 +42,5 @@ export const Icons = {
   uploadCloud: UploadCloud,
   plusCircle: PlusCircle,
   logOut: LogOut,
+  settings: Settings,
 };

@@ -53,10 +53,24 @@ export function Sidebar({ className }: any) {
               </Link>
             ))}
             <Separator className="my-6" />
+            <Link
+              href="/admin/konfigurasi-website"
+              className="flex items-center"
+            >
+              <Button
+                variant={
+                  isLinkActive("konfigurasi-website") ? "secondary" : "ghost"
+                }
+                className="w-full justify-start"
+              >
+                <Icons.settings className="h-4 w-4 mr-2" />
+                <span className="capitalize">Konfigurasi Website</span>
+              </Button>
+            </Link>
             <Link href="#logout" className="flex items-center">
               <Button variant="ghost" className="w-full justify-start">
                 <Icons.logOut className="h-4 w-4 mr-2" />
-                <span className="capitalize">Logout</span>
+                <span className="capitalize">Log Out</span>
               </Button>
             </Link>
           </div>
