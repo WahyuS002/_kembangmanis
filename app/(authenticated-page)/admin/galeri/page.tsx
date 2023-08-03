@@ -22,6 +22,15 @@ interface FileWithPreview extends File {
 }
 
 export default function AdminGaleriPage() {
+  useEffect(() => {
+    const fetchGalleryData = async () => {
+      const data = await fetch("/api/galeri");
+      console.log(data);
+    };
+
+    fetchGalleryData();
+  }, []);
+
   return (
     <>
       <div className="flex items-center justify-between">
