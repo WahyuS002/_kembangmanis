@@ -11,6 +11,7 @@ import {
   PlusCircle,
   LogOut,
   Settings,
+  Menu,
 } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -43,4 +44,5 @@ export const Icons = {
   plusCircle: PlusCircle,
   logOut: LogOut,
   settings: Settings,
+  menu: Menu,
 };

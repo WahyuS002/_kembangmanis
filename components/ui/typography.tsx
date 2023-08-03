@@ -11,7 +11,7 @@ const TypographyH1 = forwardRef<HTMLHeadingElement, TypographyProps>(
   ({ children, className, ...props }, ref) => {
     return (
       <h1
-        className={cn("text-6xl font-extrabold", className)}
+        className={cn("text-4xl font-extrabold lg:text-6xl", className)}
         ref={ref}
         {...props}
       >
