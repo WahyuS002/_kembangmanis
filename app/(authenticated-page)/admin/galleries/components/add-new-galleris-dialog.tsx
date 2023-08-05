@@ -21,7 +21,7 @@ interface FileWithPreview extends File {
 }
 
 export default function AddNewGalleriesDialog() {
-  const [files, setFiles] = useState<FileWithPreview[]>([]);
+  const [images, setImages] = useState<FileWithPreview[]>([]);
   const [title, setTitle] = useState<string>("");
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -29,7 +29,7 @@ export default function AddNewGalleriesDialog() {
       "image/*": [".png", ".jpeg", ".jpg"],
     },
     onDrop: (acceptedFiles) => {
-      setFiles(
+      setImages(
         acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
@@ -39,15 +39,17 @@ export default function AddNewGalleriesDialog() {
     },
   });
 
-  const handleDeleteFile = (fileName: string) => {
-    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+  const handleDeleteImage = (fileName: string) => {
+    setImages((prevFiles) =>
+      prevFiles.filter((file) => file.name !== fileName)
+    );
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
-    files.forEach((file) => formData.append("files[]", file));
+    images.forEach((image) => formData.append("images[]", image));
 
     console.log("Form data:", formData);
 
@@ -59,7 +61,7 @@ export default function AddNewGalleriesDialog() {
       });
       console.log("Upload successful:", response.data);
       // Reset form fields and uploaded files after successful upload
-      setFiles([]);
+      setImages([]);
       setTitle("");
     } catch (error) {
       console.error("Error uploading images:", error);
@@ -68,24 +70,24 @@ export default function AddNewGalleriesDialog() {
 
   const addMorePhotos = () => {};
 
-  const thumbs = files.map((file) => (
+  const thumbs = images.map((image) => (
     <div
       className="w-32 h-32 relative rounded-md overflow-hidden mr-2 mb-2 group"
-      key={file.name}
+      key={image.name}
     >
       <img
         className="w-full h-full object-cover"
-        src={file.preview}
+        src={image.preview}
         // Revoke data uri after image is loaded
         onLoad={() => {
-          URL.revokeObjectURL(file.preview);
+          URL.revokeObjectURL(image.preview);
         }}
-        // alt={`${file.name} preview`}
+        // alt={`${image.name} preview`}
       />
       <Button
         className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 hidden group-hover:block"
         variant="outline"
-        onClick={() => handleDeleteFile(file.name)}
+        onClick={() => handleDeleteImage(image.name)}
       >
         Delete
       </Button>
@@ -94,8 +96,8 @@ export default function AddNewGalleriesDialog() {
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
-  }, [files]);
+    return () => images.forEach((image) => URL.revokeObjectURL(image.preview));
+  }, [images]);
 
   return (
     <Dialog>
@@ -123,7 +125,7 @@ export default function AddNewGalleriesDialog() {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          {files.length > 0 ? (
+          {images.length > 0 ? (
             <div className="bg-zinc-100 border-4 relative border-dotted border-zinc-200 aspect-square rounded-xl cursor-pointer p-2 overflow-auto my-6">
               <div className="flex justify-center flex-wrap">
                 <div
