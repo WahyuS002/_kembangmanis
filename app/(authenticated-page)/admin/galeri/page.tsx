@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import axios from "@/lib/axios";
 
 interface FileWithPreview extends File {
   preview: string;
@@ -24,8 +25,8 @@ interface FileWithPreview extends File {
 export default function AdminGaleriPage() {
   useEffect(() => {
     const fetchGalleryData = async () => {
-      const data = await fetch("/api/galeri");
-      console.log(data);
+      const data = await axios.get("/api/galleries");
+      console.log("data", data);
     };
 
     fetchGalleryData();
@@ -38,8 +39,8 @@ export default function AdminGaleriPage() {
         <TambahGaleriDialog />
       </div>
       <section className="mt-4 grid grid-cols-4 gap-5">
-        {[...Array(4)].map(() => (
-          <div>
+        {[...Array(4)].map((_, index) => (
+          <div key={index}>
             <div className="aspect-square rounded-lg bg-zinc-900" />
             <p className="mt-4 font-medium">Dokumentasi Kuda Terbang</p>
             <div className="flex items-center mt-2">
