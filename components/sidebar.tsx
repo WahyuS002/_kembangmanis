@@ -11,12 +11,29 @@ import { Separator } from "./ui/separator";
 const items = [
   {
     icon: <Icons.layoutDashboard className="h-4 w-4 mr-2" />,
+    label: "dashboard",
     link: "dashboard",
   },
-  { icon: <Icons.layoutPanelTop className="h-4 w-4 mr-2" />, link: "struktur" },
-  { icon: <Icons.image className="h-4 w-4 mr-2" />, link: "galeri" },
-  { icon: <Icons.newspaper className="h-4 w-4 mr-2" />, link: "berita" },
-  { icon: <Icons.users className="h-4 w-4 mr-2" />, link: "user" },
+  {
+    icon: <Icons.layoutPanelTop className="h-4 w-4 mr-2" />,
+    label: "struktur",
+    link: "structures",
+  },
+  {
+    icon: <Icons.image className="h-4 w-4 mr-2" />,
+    label: "galeri",
+    link: "galleries",
+  },
+  {
+    icon: <Icons.newspaper className="h-4 w-4 mr-2" />,
+    label: "berita",
+    link: "news",
+  },
+  {
+    icon: <Icons.users className="h-4 w-4 mr-2" />,
+    label: "user",
+    link: "users",
+  },
 ];
 
 export function Sidebar({ className }: any) {
@@ -48,19 +65,14 @@ export function Sidebar({ className }: any) {
                   className="w-full justify-start"
                 >
                   {item.icon}
-                  <span className="capitalize">{item.link}</span>
+                  <span className="capitalize">{item.label}</span>
                 </Button>
               </Link>
             ))}
             <Separator className="my-6" />
-            <Link
-              href="/admin/konfigurasi-website"
-              className="flex items-center"
-            >
+            <Link href="/admin/web-config" className="flex items-center">
               <Button
-                variant={
-                  isLinkActive("konfigurasi-website") ? "secondary" : "ghost"
-                }
+                variant={isLinkActive("web-config") ? "secondary" : "ghost"}
                 className="w-full justify-start"
               >
                 <Icons.settings className="h-4 w-4 mr-2" />

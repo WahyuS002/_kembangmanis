@@ -15,13 +15,13 @@ export default function Nav() {
             <Link href="/">Beranda</Link>
           </li>
           <li>
-            <Link href="/struktur">Struktur</Link>
+            <Link href="/structures">Struktur</Link>
           </li>
           <li>
-            <Link href="/galeri">Galeri</Link>
+            <Link href="/galleries">Galeri</Link>
           </li>
           <li>
-            <Link href="/berita">Berita</Link>
+            <Link href="/news">Berita</Link>
           </li>
           <Button>
             <Link href="/login">Masuk</Link>
