@@ -1,6 +1,6 @@
 import { TypographyH1 } from "@/components/ui/typography";
 
-export default function GaleriPage() {
+export default function GalleriesPage() {
   return (
     <div className="min-h-screen pt-10">
       <TypographyH1 className="text-center max-w-3xl mx-auto pb-20">

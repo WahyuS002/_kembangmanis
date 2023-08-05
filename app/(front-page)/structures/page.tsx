@@ -2,7 +2,7 @@ import ProfileCard from "@/components/profile-card";
 import { TypographyH1 } from "@/components/ui/typography";
 import profiles from "@/data.json";
 
-export default function StrukturPage() {
+export default function StructuresPage() {
   return (
     <div className="min-h-screen pt-10">
       <TypographyH1 className="text-center max-w-3xl mx-auto pb-20">

@@ -1,4 +1,4 @@
-export default function KonfigurasiWebsitePage() {
+export default function AdminWebConfigPage() {
   return (
     <div>
       <div></div>

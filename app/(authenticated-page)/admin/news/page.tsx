@@ -1,7 +1,6 @@
 import { TypographyH2 } from "@/components/ui/typography";
-import { Icons } from "@/components/icons";
 
-export default function AdminBeritaPage() {
+export default function AdminNewsPage() {
   return (
     <>
       <TypographyH2>Berita</TypographyH2>

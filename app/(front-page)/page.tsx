@@ -2,7 +2,7 @@ import { TypographyH1, TypographyH2 } from "@/components/ui/typography";
 import natureImg from "@/public/images/nature-1.jpg";
 import Image from "next/image";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div>
       <main className="pt-12 container mx-auto lg:pt-24">

@@ -17,26 +17,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import axios from "@/lib/axios";
+import Image from "next/image";
 
 interface FileWithPreview extends File {
   preview: string;
 }
 
-export default function AdminGaleriPage() {
-  useEffect(() => {
-    const fetchGalleryData = async () => {
-      const data = await axios.get("/api/galleries");
-      console.log("data", data);
-    };
-
-    fetchGalleryData();
-  }, []);
-
+export default function AdminGalleriesPage() {
   return (
     <>
       <div className="flex items-center justify-between">
         <TypographyH2>Galeri</TypographyH2>
-        <TambahGaleriDialog />
+        <AddNewGalleriesDialog />
       </div>
       <section className="mt-4 grid grid-cols-4 gap-5">
         {[...Array(4)].map((_, index) => (
@@ -54,7 +46,7 @@ export default function AdminGaleriPage() {
   );
 }
 
-function TambahGaleriDialog() {
+function AddNewGalleriesDialog() {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -83,13 +75,14 @@ function TambahGaleriDialog() {
       className="w-32 h-32 relative rounded-md overflow-hidden mr-2 mb-2 group"
       key={file.name}
     >
-      <img
+      <Image
         className="w-full h-full object-cover"
         src={file.preview}
         // Revoke data uri after image is loaded
         onLoad={() => {
           URL.revokeObjectURL(file.preview);
         }}
+        alt={`${file.name} preview`}
       />
       <Button
         className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 hidden group-hover:block"
@@ -104,7 +97,7 @@ function TambahGaleriDialog() {
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
-  }, []);
+  }, [files]);
 
   return (
     <Dialog>

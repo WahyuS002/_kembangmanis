@@ -9,11 +9,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export default function AdminStrukturPage() {
+export default function AdminUsersPage() {
   return (
     <>
       <TypographyH2>User</TypographyH2>
-      <UserTable />
+      <UsersTable />
     </>
   );
 }
@@ -31,7 +31,7 @@ const users = [
   },
 ];
 
-export function UserTable() {
+export function UsersTable() {
   return (
     <Table>
       <TableCaption>A list of recent users.</TableCaption>
