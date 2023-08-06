@@ -51,8 +51,6 @@ export default function AddNewGalleriesDialog() {
     formData.append("title", title);
     images.forEach((image) => formData.append("images[]", image));
 
-    console.log("Form data:", formData);
-
     try {
       const response = await axios.post("/api/galleries", formData, {
         headers: {

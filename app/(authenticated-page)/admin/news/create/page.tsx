@@ -1,23 +1,17 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import Editor from "./editor";
 import { useState } from "react";
 import { Icons } from "@/components/icons";
 import Image from "next/image";
-import useLocalStorage from "@/lib/hooks/use-local-storage";
-import DEFAULT_EDITOR_CONTENT from "./editor/default-content";
 import { Button } from "@/components/ui/button";
 import axios from "@/lib/axios";
 
 export default function CreateNewsPage() {
   const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useLocalStorage(
-    "content",
-    DEFAULT_EDITOR_CONTENT
-  );
+  const [content, setContent] = useState<string>("");
 
-  const [thumbnail, setThumbnail] = useState();
+  const [thumbnail, setThumbnail] = useState<File | undefined>(undefined);
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,8 +34,8 @@ export default function CreateNewsPage() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("thumbnail", thumbnail);
-    formData.append("author_id", 1);
+    formData.append("thumbnail", thumbnail as File);
+    formData.append("author_id", "1");
 
     try {
       const response = await axios.post("/api/news", formData, {
@@ -49,8 +43,6 @@ export default function CreateNewsPage() {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      console.log("Upload successful:", response.data);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +62,6 @@ export default function CreateNewsPage() {
           onChange={(e) => setTitle(e.target.value)}
           className="w-full max-w-screen-lg sm:border sm:rounded-lg border-stone-200 shadow-sm"
         />
-        <Editor content={content} setContent={setContent} />
       </div>
       <div className="w-[30%]">
         <div>
@@ -110,6 +101,7 @@ export default function CreateNewsPage() {
           <div className="flex justify-end mt-4">
             <Button type="submit">Simpan Berita</Button>
           </div>
+          {JSON.stringify(content)}
         </div>
       </div>
     </form>
