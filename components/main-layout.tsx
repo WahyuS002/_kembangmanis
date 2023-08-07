@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const frontPage = ["/", "/structures", "/galleries", "/news"];
+  const frontPage = ["/", "/structures", "/galleries", "/posts"];
 
   if (frontPage.includes(pathname)) {
     return (

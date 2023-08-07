@@ -15,7 +15,7 @@ interface Errors {
   thumbnail?: string[];
 }
 
-export default function CreateNewsPage() {
+export default function CreatePostPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -51,7 +51,7 @@ export default function CreateNewsPage() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      await axios.post("/api/news", formData, {
+      await axios.post("/api/posts", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

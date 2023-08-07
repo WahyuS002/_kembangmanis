@@ -21,7 +21,7 @@ export default function Nav() {
             <Link href="/galleries">Galeri</Link>
           </li>
           <li>
-            <Link href="/news">Berita</Link>
+            <Link href="/posts">Berita</Link>
           </li>
           <Button>
             <Link href="/login">Masuk</Link>

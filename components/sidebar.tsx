@@ -27,7 +27,7 @@ const items = [
   {
     icon: <Icons.newspaper className="h-4 w-4 mr-2" />,
     label: "berita",
-    link: "news",
+    link: "posts",
   },
   {
     icon: <Icons.users className="h-4 w-4 mr-2" />,
