@@ -1,8 +1,20 @@
+export interface Author {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export interface Media {
+  id: number;
+  original_url: string;
+}
+
 export interface Post {
-  author: string;
-  date: string;
+  author: Author;
+  created_at: string;
   title: string;
-  thumbnail: string;
   slug: string;
+  thumbnail: string;
+  media?: Media[];
   content?: string;
 }

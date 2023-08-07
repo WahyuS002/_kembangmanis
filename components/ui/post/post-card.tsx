@@ -1,16 +1,26 @@
+import { formatDate } from "@/lib/utils";
 import { Post } from "@/store/types";
+import Image from "next/image";
 
 export default function PostCard({
   title,
   slug,
   author,
   thumbnail,
-  date,
+  created_at,
 }: Post) {
   return (
     <div className="group cursor-pointer">
       <div className=" overflow-hidden rounded-md bg-gray-100 transition-all hover:scale-105   dark:bg-gray-800">
-        <a className="relative block aspect-square" href={`/posts/${slug}`}></a>
+        <a className="relative block aspect-square" href={`/posts/${slug}`}>
+          <Image
+            width={500}
+            height={500}
+            src={thumbnail}
+            alt={`${title}-thumbnail`}
+            className="object-cover w-full h-full"
+          />
+        </a>
       </div>
       <div className="">
         <div>
@@ -27,15 +37,12 @@ export default function PostCard({
                 <div className="relative h-5 w-5 flex-shrink-0">
                   <div className="w-5 h-5 rounded-full bg-zinc-900" />
                 </div>
-                <span className="truncate text-sm">{author}</span>
+                <span className="truncate text-sm">{author.name}</span>
               </div>
             </a>
             <span className="text-xs text-gray-300 dark:text-gray-600">•</span>
-            <time
-              className="truncate text-sm"
-              dateTime="2022-10-21T15:48:00.000Z"
-            >
-              {date}
+            <time className="truncate text-sm" dateTime={created_at}>
+              {formatDate(created_at)}
             </time>
           </div>
         </div>

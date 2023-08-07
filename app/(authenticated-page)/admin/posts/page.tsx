@@ -37,13 +37,13 @@ export default function AdminPostPage() {
         </Button>
       </div>
       <section className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
-        {posts?.map((item, index) => (
+        {posts?.map((post, index) => (
           <PostCard
-            title={item.title}
-            slug={item.slug}
-            author="Wahyu"
-            date="2020"
-            thumbnail="test"
+            title={post.title}
+            slug={post.slug}
+            author={post.author}
+            created_at={post.created_at}
+            thumbnail={post.media?.[0]?.original_url || ""}
             key={index}
           />
         ))}
