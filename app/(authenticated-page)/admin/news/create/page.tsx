@@ -6,10 +6,20 @@ import { Icons } from "@/components/icons";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import axios from "@/lib/axios";
+import Editor from "./editor";
+import { Toaster, toast } from "sonner";
+
+interface Errors {
+  title?: string[];
+  content?: string[];
+  thumbnail?: string[];
+}
 
 export default function CreateNewsPage() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [errors, setErrors] = useState<Errors>();
 
   const [thumbnail, setThumbnail] = useState<File | undefined>(undefined);
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
@@ -30,6 +40,7 @@ export default function CreateNewsPage() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("title", title);
@@ -38,72 +49,103 @@ export default function CreateNewsPage() {
     formData.append("author_id", "1");
 
     try {
-      const response = await axios.post("/api/news", formData, {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      await axios.post("/api/news", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-    } catch (error) {
-      console.log(error);
+
+      setIsLoading(false);
+      toast.success("Berhasil menambahkan berita");
+      resetAllInputs();
+    } catch (e: any) {
+      setIsLoading(false);
+      setErrors(e.response.data.errors);
+      toast.error("Terjadi Kesalahan");
     }
   };
 
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex space-x-12"
-      encType="multipart/form-data"
-    >
-      <div className="w-[70%] space-y-4">
-        <Input
-          type="text"
-          placeholder="Judul Berita"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full max-w-screen-lg sm:border sm:rounded-lg border-stone-200 shadow-sm"
-        />
-      </div>
-      <div className="w-[30%]">
-        <div>
-          {thumbnailPreview ? (
-            <div className="relative">
-              <Image
-                src={thumbnailPreview}
-                alt="Uploaded Image"
-                width={800}
-                height={800}
-                className="sm:rounded-lg"
-              />
-              <input
-                type="file"
-                accept="image/*"
-                className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
-                onChange={handleImageChange}
-              />
-            </div>
-          ) : (
-            <div className="bg-zinc-100 border-4 relative border-dotted border-zinc-200 aspect-square rounded-xl cursor-pointer p-2">
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-[300px]">
-                <Icons.uploadCloud className="w-16 h-16 text-zinc-400" />
+  const resetAllInputs = () => {
+    setTitle("");
+    setContent("");
+    setThumbnail(undefined);
+    setThumbnailPreview(null);
+  };
 
-                <span className="mt-2 text-zinc-400 font-semibold">
-                  Upload Thumbnail
-                </span>
-              </div>
-              <input
-                type="file"
-                accept="image/*"
-                className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
-                onChange={handleImageChange}
-              />
-            </div>
+  return (
+    <>
+      <Toaster />
+      <form
+        onSubmit={handleSubmit}
+        className="flex space-x-12"
+        encType="multipart/form-data"
+      >
+        <div className="w-[70%] space-y-4">
+          <Input
+            type="text"
+            placeholder="Judul Berita"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full max-w-screen-lg sm:border sm:rounded-lg border-stone-200 shadow-sm"
+          />
+          {errors?.title && title === "" && (
+            <span className="text-xs text-red-500">{errors.title}</span>
           )}
-          <div className="flex justify-end mt-4">
-            <Button type="submit">Simpan Berita</Button>
-          </div>
-          {JSON.stringify(content)}
+          <Editor content={content} setContent={setContent} />
+          {errors?.content && content === "" && (
+            <span className="text-xs text-red-500">{errors.content}</span>
+          )}
         </div>
-      </div>
-    </form>
+        <div className="w-[30%]">
+          <div>
+            {thumbnailPreview ? (
+              <div className="bg-zinc-100 border-4 relative border-dotted border-zinc-200 aspect-square rounded-xl cursor-pointer p-2">
+                <Image
+                  src={thumbnailPreview}
+                  alt="Uploaded Image"
+                  width={800}
+                  height={800}
+                  className="sm:rounded-lg object-contain w-full h-full"
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+                  onChange={handleImageChange}
+                />
+              </div>
+            ) : (
+              <div className="bg-zinc-100 border-4 relative border-dotted border-zinc-200 aspect-square rounded-xl cursor-pointer p-2">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-[300px]">
+                  <Icons.uploadCloud className="w-16 h-16 text-zinc-400" />
+
+                  <span className="mt-2 text-zinc-400 font-semibold">
+                    Upload Thumbnail
+                  </span>
+                </div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+                  onChange={handleImageChange}
+                />
+              </div>
+            )}
+            <div className="flex justify-end mt-4">
+              <Button
+                className="flex items-center gap-2"
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading && <Icons.loadingCircle />}
+                Simpan Berita
+              </Button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </>
   );
 }
