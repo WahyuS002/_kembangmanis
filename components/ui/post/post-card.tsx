@@ -1,4 +1,4 @@
-import { formatDate } from "@/lib/utils";
+import { formatDate, truncate } from "@/lib/utils";
 import { Post } from "@/store/types";
 import Image from "next/image";
 
@@ -27,7 +27,7 @@ export default function PostCard({
           <h2 className="text-lg font-semibold leading-snug tracking-tight mt-5 dark:text-white">
             <a href={`/posts/${slug}`}>
               <span className="bg-gradient-to-r from-green-200 to-green-100 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px] dark:from-purple-800 dark:to-purple-900">
-                {title}
+                {truncate(title, 100, true)}
               </span>
             </a>
           </h2>
