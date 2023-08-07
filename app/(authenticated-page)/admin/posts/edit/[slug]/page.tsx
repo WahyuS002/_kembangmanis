@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icons } from "@/components/icons";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,13 @@ interface Errors {
   thumbnail?: string[];
 }
 
-export default function CreatePostPage() {
+interface EditPostPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default function EditPostPage({ params }: EditPostPageProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -48,18 +54,19 @@ export default function CreatePostPage() {
     formData.append("content", content);
     formData.append("thumbnail", thumbnail as File);
     formData.append("author_id", "1");
+    formData.append("_method", "PUT");
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      await axios.post("/api/posts", formData, {
+      await axios.post(`/api/posts/${params.slug}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
       setIsLoading(false);
-      toast.success("Berhasil menambahkan berita");
+      toast.success("Berhasil mengedit berita");
       resetAllInputs();
     } catch (e: any) {
       setIsLoading(false);
@@ -75,10 +82,22 @@ export default function CreatePostPage() {
     setThumbnailPreview(null);
   };
 
+  useEffect(() => {
+    const fetchPost = async () => {
+      const { data } = await axios.get(`/api/posts/${params.slug}`);
+
+      setTitle(data.title);
+      setContent(data.content);
+      // setThumbnailPreview(data.media[0].original_url);
+    };
+
+    fetchPost();
+  }, [params.slug]);
+
   return (
     <>
       <Toaster />
-      <TypographyH2>Tambah Berita</TypographyH2>
+      <TypographyH2>Edit Berita</TypographyH2>
       <form
         onSubmit={handleSubmit}
         className="flex space-x-12 mt-8"
