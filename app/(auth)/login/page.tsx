@@ -15,27 +15,37 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import axios from "@/lib/axios";
 import Link from "next/link";
+import { delay } from "@/lib/utils";
+
+interface Errors {
+  email?: string[];
+  password?: string[];
+}
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [errors, setErrors] = useState<Array<string>>([]);
+  const [errors, setErrors] = useState<Errors>();
 
   const csrf = () => axios.get("/sanctum/csrf-cookie");
 
   const handleLogin = async () => {
+    setIsLoading(true);
+    await delay(1000);
     await csrf();
 
-    await axios
-      .post("/login", {
+    try {
+      await axios.post("/login", {
         email: email,
         password: password,
-      })
-      .catch((error) => {
-        if (error.response.status !== 422) throw error;
-        setErrors(error.response.data.errors);
       });
+    } catch (error: any) {
+      if (error.response.status !== 422) throw error;
+      setErrors(error.response.data.errors);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -63,6 +73,9 @@ export default function LoginPage() {
                 placeholder="m@example.com"
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {errors?.email && email === "" && (
+                <span className="text-xs text-red-500">{errors.email}</span>
+              )}
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
@@ -71,11 +84,18 @@ export default function LoginPage() {
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {errors?.password && password === "" && (
+                <span className="text-xs text-red-500">{errors.password}</span>
+              )}
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="w-full" onClick={handleLogin}>
-              Masuk
+            <Button
+              className="w-full"
+              onClick={handleLogin}
+              disabled={isLoading}
+            >
+              {isLoading ? <Icons.loadingCircle /> : "Masuk"}
             </Button>
           </CardFooter>
         </Card>

@@ -91,7 +91,7 @@ export default function EditPostPage({ params }: EditPostPageProps) {
         duration: 1000,
       });
       resetAllInputs();
-      delay(1000).then(() => router.push(`/admin/posts`));
+      await delay(1000).then(() => router.push(`/admin/posts`));
     } catch (e: any) {
       toast.error("Terjadi Kesalahan");
     }

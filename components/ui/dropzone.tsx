@@ -112,7 +112,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ className }) => {
         },
       });
       toast.success(`Berhasil menambahkan galeri ${title}`);
-      delay(1000).then(() => router.push(`/admin/galleries`));
+      await delay(1000).then(() => router.push(`/admin/galleries`));
       // Reset form fields and uploaded files after successful upload
       setFiles([]);
       setTitle("");
