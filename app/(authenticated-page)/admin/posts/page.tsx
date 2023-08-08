@@ -2,7 +2,7 @@
 
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import PaginationControls from "@/components/ui/pagination-controls";
+import PaginationControls, { Meta } from "@/components/ui/pagination-controls";
 // import PaginationControls from "@/components/ui/pagination-controls";
 import PostCard from "@/components/ui/post/post-card";
 import { TypographyH2 } from "@/components/ui/typography";
@@ -13,7 +13,12 @@ import { useEffect, useState } from "react";
 
 export default function AdminPostPage() {
   const [posts, setPosts] = useState<Post[]>();
-  const [pagination, setPagination] = useState();
+  const [pagination, setPagination] = useState<Meta>({
+    currentPage: 1,
+    totalPages: 1,
+    prevPageUrl: false,
+    nextPageUrl: false,
+  });
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
