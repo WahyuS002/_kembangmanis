@@ -43,7 +43,7 @@ export default function AdminStructuresPage() {
 
     try {
       const formData = new FormData();
-      formData.append("settingType", "structure");
+      formData.append("settingType", "structure-image");
       formData.append("structureImage", image as File);
       formData.append("settings_value[structuredImage]", image?.name as string);
       formData.append("_method", "PUT");

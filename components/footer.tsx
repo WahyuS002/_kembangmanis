@@ -35,7 +35,12 @@ export default function Footer() {
           <div className="flex flex-col text-xs items-center sm:flex-row sm:space-x-5">
             <span>Copyright © 2023 KKN 215, Inc. All rights reserved.</span>
             <div className="flex space-x-4 lg:space-x-7 mt-3 sm:mt-0">
-              <Link href="/legal/privacy-policy" className="font-bold">
+              <Link
+                href="https://www.instagram.com/desa.kembang.manis/"
+                target="_blank"
+                rel="noreferrer"
+                className="font-bold"
+              >
                 <Icons.instagram className="w-5 h-5" />
               </Link>
             </div>
