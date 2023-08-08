@@ -1,14 +1,8 @@
 import { Button } from "@/components/ui/button";
-
-export interface Meta {
-  currentPage: number;
-  totalPages: number;
-  prevPageUrl?: boolean;
-  nextPageUrl?: boolean;
-}
+import { MetaData } from "@/store/types";
 
 interface PaginationControlsProps {
-  pagination: Meta;
+  pagination: MetaData;
   setCurrentPage: (page: number) => void;
 }
 

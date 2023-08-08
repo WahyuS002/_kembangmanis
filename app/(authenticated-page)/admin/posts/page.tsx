@@ -2,8 +2,8 @@
 
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import PaginationControls, { Meta } from "@/components/ui/pagination-controls";
-// import PaginationControls from "@/components/ui/pagination-controls";
+import PaginationControls from "@/components/ui/pagination-controls";
+import { MetaData } from "@/store/types";
 import PostCard from "@/components/ui/post/post-card";
 import { TypographyH2 } from "@/components/ui/typography";
 import axios from "@/lib/axios";
@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 export default function AdminPostPage() {
   const [posts, setPosts] = useState<Post[]>();
-  const [pagination, setPagination] = useState<Meta>({
+  const [pagination, setPagination] = useState<MetaData>({
     currentPage: 1,
     totalPages: 1,
     prevPageUrl: false,

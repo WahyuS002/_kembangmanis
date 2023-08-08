@@ -9,11 +9,11 @@ import { usePathname } from "next/navigation";
 import { Separator } from "./ui/separator";
 
 const items = [
-  {
-    icon: <Icons.layoutDashboard className="h-4 w-4 mr-2" />,
-    label: "dashboard",
-    link: "dashboard",
-  },
+  // {
+  //   icon: <Icons.layoutDashboard className="h-4 w-4 mr-2" />,
+  //   label: "dashboard",
+  //   link: "dashboard",
+  // },
   {
     icon: <Icons.layoutPanelTop className="h-4 w-4 mr-2" />,
     label: "struktur",

@@ -35,4 +35,16 @@ const TypographyH2 = forwardRef<HTMLHeadingElement, TypographyProps>(
 
 TypographyH2.displayName = "TypographyH2";
 
-export { TypographyH1, TypographyH2 };
+const TypographyH3 = forwardRef<HTMLHeadingElement, TypographyProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <h2 className={cn("text-xl font-bold", className)} ref={ref} {...props}>
+        <Balancer>{children}</Balancer>
+      </h2>
+    );
+  }
+);
+
+TypographyH3.displayName = "TypographyH3";
+
+export { TypographyH1, TypographyH2, TypographyH3 };

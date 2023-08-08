@@ -18,3 +18,15 @@ export interface Post {
   media?: Media[];
   content?: string;
 }
+
+export interface MetaData {
+  currentPage: number;
+  totalPages: number;
+  prevPageUrl?: boolean;
+  nextPageUrl?: boolean;
+}
+
+export interface Gallery {
+  title: string;
+  media: Media[];
+}
