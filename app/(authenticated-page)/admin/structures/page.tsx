@@ -16,18 +16,22 @@ import {
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { Separator } from "@radix-ui/react-separator";
+import { Toaster, toast } from "sonner";
 
 export default function AdminStructuresPage() {
   const [structureImage, setStructureImage] = useState<string>("");
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [image, setImage] = useState<File | undefined>(undefined);
+  const [triggerEffect, setTriggerEffect] = useState<boolean>(false);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    setImage(file);
     if (file) {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        setImageSrc(reader.result as string);
+        setImagePreview(reader.result as string);
       };
 
       reader.readAsDataURL(file);
@@ -40,17 +44,20 @@ export default function AdminStructuresPage() {
     try {
       const formData = new FormData();
       formData.append("settingType", "structure");
-      formData.append("structureImage", imageSrc as string);
+      formData.append("structureImage", image as File);
+      formData.append("settings_value[structuredImage]", image?.name as string);
+      formData.append("_method", "PUT");
 
-      const response = await axios.put("/api/settings/update", formData, {
+      await axios.post("/api/settings/update", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      console.log("Response:", response);
+      toast.success("Struktur berhasil diupdate");
+      setTriggerEffect(true);
     } catch (error) {
-      console.log("Error:", error);
+      toast.error("Terjadi kesalahan saat mengupdate struktur");
     }
   };
 
@@ -61,10 +68,11 @@ export default function AdminStructuresPage() {
     };
 
     getStructureImage();
-  }, []);
+  }, [triggerEffect]);
 
   return (
     <>
+      <Toaster />
       <div className="flex items-center justify-between">
         <TypographyH2>Struktur</TypographyH2>
         <Dialog>
@@ -74,7 +82,7 @@ export default function AdminStructuresPage() {
               Edit Struktur
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[500px]">
             <form onSubmit={handleSubmit} encType="multipart/form-data">
               <DialogHeader>
                 <DialogTitle>Edit Struktur</DialogTitle>
@@ -92,20 +100,21 @@ export default function AdminStructuresPage() {
                 </DialogDescription>
               </DialogHeader>
               <Separator />
-              <div className="bg-zinc-100 border-4 relative border-dotted border-zinc-200 aspect-square rounded-xl cursor-pointer p-2 overflow-auto my-6">
+              <div className="bg-zinc-100 border-4 relative border-dotted border-zinc-200 rounded-xl cursor-pointer p-2 overflow-auto my-6 h-[250px]">
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-[300px]">
-                  {imageSrc ? (
+                  {imagePreview ? (
                     <Image
-                      src={imageSrc}
+                      src={imagePreview}
                       alt="Uploaded Image"
-                      width={800}
-                      height={800}
+                      width={1000}
+                      height={1000}
+                      className="object-cover w-full h-full"
                     />
                   ) : (
                     <Icons.uploadCloud className="w-16 h-16 text-zinc-400" />
                   )}
                   <span className="mt-2 text-zinc-400 font-semibold">
-                    {!imageSrc && "Upload File Struktur Terbaru"}
+                    {!image && "Upload File Struktur Terbaru"}
                   </span>
                 </div>
                 <input
