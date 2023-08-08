@@ -2,6 +2,8 @@
 
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import PaginationControls from "@/components/ui/pagination-controls";
+// import PaginationControls from "@/components/ui/pagination-controls";
 import PostCard from "@/components/ui/post/post-card";
 import { TypographyH2 } from "@/components/ui/typography";
 import axios from "@/lib/axios";
@@ -11,19 +13,22 @@ import { useEffect, useState } from "react";
 
 export default function AdminPostPage() {
   const [posts, setPosts] = useState<Post[]>();
+  const [pagination, setPagination] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("/api/posts");
+        const response = await axios.get(`/api/posts?page=${currentPage}`);
         setPosts(response.data.data);
+        setPagination(response.data.meta);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     };
 
     fetchPosts();
-  }, []);
+  }, [currentPage]);
 
   return (
     <>
@@ -48,6 +53,10 @@ export default function AdminPostPage() {
           />
         ))}
       </section>
+      <PaginationControls
+        pagination={pagination}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 }
