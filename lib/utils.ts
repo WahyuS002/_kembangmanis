@@ -27,3 +27,5 @@ export const truncate = (
       : subString) + "…"
   ); // Use ellipsis character instead of HTML entity
 };
+
+export const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));

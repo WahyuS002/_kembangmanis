@@ -13,6 +13,7 @@ import {
   Settings,
   Menu,
   Pencil,
+  Trash,
 } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -65,4 +66,5 @@ export const Icons = {
   settings: Settings,
   menu: Menu,
   pencil: Pencil,
+  trash: Trash,
 };

@@ -9,6 +9,9 @@ import axios from "@/lib/axios";
 import Editor from "@/components/ui/editor";
 import { Toaster, toast } from "sonner";
 import { TypographyH2 } from "@/components/ui/typography";
+import { useRouter } from "next/navigation";
+import DeleteDialog from "@/components/ui/delete-dialog";
+import { delay } from "@/lib/utils";
 
 interface Errors {
   title?: string[];
@@ -23,6 +26,8 @@ interface EditPostPageProps {
 }
 
 export default function EditPostPage({ params }: EditPostPageProps) {
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -66,11 +71,28 @@ export default function EditPostPage({ params }: EditPostPageProps) {
       });
 
       setIsLoading(false);
-      toast.success("Berhasil mengedit berita");
-      resetAllInputs();
+      toast.success("Berhasil mengedit berita", {
+        action: {
+          label: "Lihat Berita",
+          onClick: () => router.push(`/admin/posts`),
+        },
+      });
     } catch (e: any) {
       setIsLoading(false);
       setErrors(e.response.data.errors);
+      toast.error("Terjadi Kesalahan");
+    }
+  };
+
+  const onDelete = async () => {
+    try {
+      await axios.delete(`/api/posts/${params.slug}`);
+      toast.success("Berhasil menghapus berita", {
+        duration: 1000,
+      });
+      resetAllInputs();
+      delay(1000).then(() => router.push(`/admin/posts`));
+    } catch (e: any) {
       toast.error("Terjadi Kesalahan");
     }
   };
@@ -161,14 +183,14 @@ export default function EditPostPage({ params }: EditPostPageProps) {
                 )}
               </>
             )}
-            <div className="flex justify-end mt-4">
-              <Button
-                className="flex items-center gap-2"
-                type="submit"
-                disabled={isLoading}
-              >
-                {isLoading && <Icons.loadingCircle />}
-                Simpan Berita
+            <div className="flex gap-4 justify-end mt-4">
+              <DeleteDialog
+                title="Hapus Berita"
+                description="Sambangi Mahasiswa KKN, Bhabinkamtibmas Polsek Lais Minta Mahasiswa Membaur dengan Warga"
+                onDelete={onDelete}
+              />
+              <Button className="w-32" type="submit" disabled={isLoading}>
+                {isLoading ? <Icons.loadingCircle /> : <>Update Berita</>}
               </Button>
             </div>
           </div>
