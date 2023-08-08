@@ -50,14 +50,14 @@ export default function LoginPage() {
 
   return (
     <div className="relative">
-      <div className="absolute left-20 top-12">
+      <div className="absolute left-4 top-10 md:left-20 md:top-12">
         <Link href="/" className="flex gap-2 items-center">
           <Icons.arrowLeft className="w-5" />
           <span className="text-sm font-medium">Kembali</span>
         </Link>
       </div>
       <div className="flex justify-center items-center h-screen">
-        <Card>
+        <Card className="mx-4">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl">Masuk</CardTitle>
             <CardDescription>

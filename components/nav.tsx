@@ -2,6 +2,14 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { Icons } from "./icons";
 import { useState } from "react";
+import { Separator } from "./ui/separator";
+
+const navItems = [
+  { name: "Beranda", href: "/" },
+  { name: "Struktur", href: "/structures" },
+  { name: "Galeri", href: "/galleries" },
+  { name: "Berita", href: "/posts" },
+];
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,18 +19,11 @@ export default function Nav() {
       <nav className="py-10 items-center justify-between font-medium container mx-auto hidden md:flex">
         <Link href="/">Desa Kembang Manis</Link>
         <ul className="flex items-center gap-8">
-          <li>
-            <Link href="/">Beranda</Link>
-          </li>
-          <li>
-            <Link href="/structures">Struktur</Link>
-          </li>
-          <li>
-            <Link href="/galleries">Galeri</Link>
-          </li>
-          <li>
-            <Link href="/posts">Berita</Link>
-          </li>
+          {navItems.map((item, index) => (
+            <li key={index}>
+              <Link href={item.href}>{item.name}</Link>
+            </li>
+          ))}
           <Button>
             <Link href="/login">Masuk</Link>
           </Button>
@@ -36,10 +37,20 @@ export default function Nav() {
         />
       </nav>
       {isMenuOpen && (
-        <ul className="px-8 py-4">
-          <li>Lorem, ipsum dolor.</li>
-          <li>Lorem, ipsum dolor.</li>
-          <li>Lorem, ipsum dolor.</li>
+        <ul className="px-8 py-4 sticky top-0 bg-white w-full h-screen text-zinc-600 mt-4">
+          {navItems.map((item, index) => (
+            <>
+              <li key={index}>
+                <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
+                  {item.name}
+                </Link>
+              </li>
+              <Separator className="mt-2 mb-4" />
+            </>
+          ))}
+          <Button className="w-full" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/login">Masuk</Link>
+          </Button>
         </ul>
       )}
     </>

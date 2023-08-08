@@ -15,6 +15,8 @@ import {
   Pencil,
   Trash,
   X,
+  Instagram,
+  MapPin,
 } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -69,4 +71,6 @@ export const Icons = {
   pencil: Pencil,
   trash: Trash,
   x: X,
+  instagram: Instagram,
+  mapPin: MapPin,
 };
