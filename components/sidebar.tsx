@@ -36,7 +36,13 @@ const items = [
   },
 ];
 
-export function Sidebar({ className }: any) {
+export function Sidebar({
+  className,
+  setIsMenuOpen,
+}: {
+  className?: string;
+  setIsMenuOpen: (value: boolean) => void;
+}) {
   const pathname = usePathname();
 
   const isLinkActive = (link: string) => {
@@ -45,10 +51,10 @@ export function Sidebar({ className }: any) {
   };
 
   return (
-    <div className={cn("pb-12", className)}>
+    <div className={className}>
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
-          <Link href="/">
+          <Link href="/" className="hidden lg:block">
             <h2 className="mb-2 px-4 text-2xl font-bold tracking-tight">
               Kembang Manis
             </h2>
@@ -59,6 +65,7 @@ export function Sidebar({ className }: any) {
                 href={`/admin/${item.link}`}
                 className="flex items-center"
                 key={`${item.link}`}
+                onClick={() => setIsMenuOpen(false)}
               >
                 <Button
                   variant={isLinkActive(item.link) ? "secondary" : "ghost"}
@@ -70,7 +77,11 @@ export function Sidebar({ className }: any) {
               </Link>
             ))}
             <Separator className="my-6" />
-            <Link href="/admin/web-config" className="flex items-center">
+            <Link
+              href="/admin/web-config"
+              className="flex items-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
               <Button
                 variant={isLinkActive("web-config") ? "secondary" : "ghost"}
                 className="w-full justify-start"

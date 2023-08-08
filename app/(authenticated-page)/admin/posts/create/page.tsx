@@ -81,10 +81,10 @@ export default function CreatePostPage() {
       <TypographyH2>Tambah Berita</TypographyH2>
       <form
         onSubmit={handleSubmit}
-        className="flex space-x-12 mt-8"
+        className="flex flex-col-reverse mt-8 lg:space-x-12 lg:flex-row"
         encType="multipart/form-data"
       >
-        <div className="w-[70%] space-y-4">
+        <div className="space-y-4 lg:w-[70%]">
           <Input
             type="text"
             placeholder="Judul Berita"
@@ -99,8 +99,23 @@ export default function CreatePostPage() {
           {errors?.content && content === "" && (
             <span className="text-xs text-red-500">{errors.content}</span>
           )}
+          <div
+            className="flex justify-end lg:hidden"
+            style={{
+              marginTop: "54px",
+            }}
+          >
+            <Button
+              className="flex items-center gap-2"
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading && <Icons.loadingCircle />}
+              Simpan Berita
+            </Button>
+          </div>
         </div>
-        <div className="w-[30%]">
+        <div className="mb-4 lg:w-[30%] lg:mb-0">
           <div>
             {thumbnailPreview ? (
               <div className="bg-zinc-100 border-4 relative border-dotted border-zinc-200 aspect-square rounded-xl cursor-pointer p-2">
@@ -142,7 +157,7 @@ export default function CreatePostPage() {
                 )}
               </>
             )}
-            <div className="flex justify-end mt-4">
+            <div className="hidden justify-end mt-4 lg:flex">
               <Button
                 className="flex items-center gap-2"
                 type="submit"

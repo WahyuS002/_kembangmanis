@@ -144,7 +144,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ className }) => {
           })}
         >
           <input {...getInputProps()} />
-          <div className="flex flex-col items-center justify-center gap-4 bg-zinc-100 border-4 relative border-dotted border-zinc-200 h-[200px] rounded-xl text-zinc-500">
+          <div className="flex flex-col items-center px-5 text-center justify-center gap-4 bg-zinc-100 border-4 relative border-dotted border-zinc-200 h-[200px] rounded-xl text-zinc-500">
             {isDragActive ? (
               <p>Drop the files here ...</p>
             ) : (
@@ -159,19 +159,21 @@ const Dropzone: React.FC<DropzoneProps> = ({ className }) => {
         {/* Preview */}
         <section className="mt-10">
           <div className="flex gap-4 items-center">
-            <TypographyH3>Preview</TypographyH3>
+            <TypographyH3>Pratinjau</TypographyH3>
             <Button
               type="button"
               size="sm"
               variant="outline"
               onClick={removeAll}
             >
-              Remove all files
+              Hapus semua file
             </Button>
           </div>
 
           {/* Accepted files */}
-          <h3 className="text-zinc-600 mt-10 border-b pb-3">Accepted Files</h3>
+          <h3 className="text-zinc-600 mt-10 border-b pb-3">
+            File yang diterima
+          </h3>
           <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-10">
             {files.map((file) => (
               <li
@@ -203,7 +205,9 @@ const Dropzone: React.FC<DropzoneProps> = ({ className }) => {
           </ul>
 
           {/* Rejected Files */}
-          <h3 className="text-zinc-600 mt-24 border-b pb-3">Rejected Files</h3>
+          <h3 className="text-zinc-600 mt-24 border-b pb-3">
+            File yang ditolak
+          </h3>
           <ul className="mt-6 flex flex-col">
             {rejected.map(({ file, errors }) => (
               <li key={file.name} className="flex items-start justify-between">

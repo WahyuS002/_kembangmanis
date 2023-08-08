@@ -44,7 +44,7 @@ export default function AdminGalleriesPage() {
           </Link>
         </Button>
       </div>
-      <section className="mt-4 grid grid-cols-4 gap-5">
+      <section className="mt-4 grid lg:grid-cols-4 gap-5">
         {galleries.map((gallery, index) => (
           <div key={index}>
             <div className="aspect-square rounded-lg bg-zinc-900 overflow-hidden">
