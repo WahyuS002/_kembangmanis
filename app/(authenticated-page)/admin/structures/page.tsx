@@ -63,7 +63,7 @@ export default function AdminStructuresPage() {
 
   useEffect(() => {
     const getStructureImage = async () => {
-      const { data } = await axios.get("/api/settings/structure");
+      const { data } = await axios.get("/api/settings/structure-image");
       setStructureImage(data.structureImage);
     };
 
