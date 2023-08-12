@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Icons } from "../icons";
 import { Gallery } from "@/store/types";
+import Link from "next/link";
 
 interface GalleryCardProps {
   gallery: Gallery;
@@ -8,7 +9,7 @@ interface GalleryCardProps {
 
 export default function GalleryCard({ gallery }: GalleryCardProps) {
   return (
-    <div>
+    <Link href={`galleries/${gallery.slug}`}>
       <div className="aspect-square rounded-lg bg-zinc-900 overflow-hidden">
         <Image
           src={gallery.media[0].original_url}
@@ -25,6 +26,6 @@ export default function GalleryCard({ gallery }: GalleryCardProps) {
           {gallery.media.length} Gambar
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

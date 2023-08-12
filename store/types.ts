@@ -28,5 +28,27 @@ export interface MetaData {
 
 export interface Gallery {
   title: string;
+  slug: string;
   media: Media[];
+  created_at: string;
+}
+
+export interface ImageProps {
+  id: number;
+  height?: string;
+  width?: string;
+  public_id?: string;
+  format?: string;
+  blurDataUrl?: string;
+  original_url?: string;
+}
+
+export interface SharedModalProps {
+  index: number;
+  images?: ImageProps[];
+  currentPhoto?: ImageProps;
+  changePhotoId: (newVal: number) => void;
+  closeModal: () => void;
+  navigation: boolean;
+  direction?: number;
 }
