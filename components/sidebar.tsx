@@ -77,7 +77,7 @@ export function Sidebar({
               </Link>
             ))}
             <Separator className="my-6" />
-            <Link
+            {/* <Link
               href="/admin/web-config"
               className="flex items-center"
               onClick={() => setIsMenuOpen(false)}
@@ -89,7 +89,7 @@ export function Sidebar({
                 <Icons.settings className="h-4 w-4 mr-2" />
                 <span className="capitalize">Konfigurasi Website</span>
               </Button>
-            </Link>
+            </Link> */}
             <Link href="#logout" className="flex items-center">
               <Button variant="ghost" className="w-full justify-start">
                 <Icons.logOut className="h-4 w-4 mr-2" />
