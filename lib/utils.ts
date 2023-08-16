@@ -7,9 +7,26 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const formatDate = (date: string) => {
-  const parsedDate = new Date(date);
-  const formattedDate = format(parsedDate, "dd LLL, yyyy");
-  return formattedDate;
+  const dateParts = date.match(
+    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/
+  );
+
+  if (dateParts) {
+    const [, year, month, day, hour, minute, second] = dateParts;
+    const utcDate = new Date(
+      Date.UTC(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hour),
+        Number(minute),
+        Number(second)
+      )
+    );
+
+    const formattedDate = format(utcDate, "dd LLL, yyyy");
+    return formattedDate;
+  }
 };
 
 export const truncate = (

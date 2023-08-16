@@ -24,11 +24,6 @@ const users = [
     role: "Admin",
     createdAt: "2 August",
   },
-  {
-    name: "Ogi Hendrikson",
-    role: "User",
-    createdAt: "2 August",
-  },
 ];
 
 export function UsersTable() {

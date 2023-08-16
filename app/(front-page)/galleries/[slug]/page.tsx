@@ -1,20 +1,24 @@
 "use client";
 
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import Modal from "@/components/ui/modal";
 import axios from "@/lib/axios";
-import { formatDate } from "@/lib/utils";
+import { delay, formatDate } from "@/lib/utils";
 import { Gallery } from "@/store/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function GalleriesDetailPage({
   params,
 }: {
   params: { slug: string; queryId: string };
 }) {
+  const route = useRouter();
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
   const [gallery, setGallery] = useState<Gallery>({
     title: "",
     slug: "",
@@ -24,6 +28,12 @@ export default function GalleriesDetailPage({
 
   const searchParams = useSearchParams();
   const photoId = searchParams.get("photoId");
+
+  const copyLinkAddress = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setIsLinkCopied(true);
+    delay(1000).then(() => setIsLinkCopied(false));
+  };
 
   useEffect(() => {
     const fetchGalleryBySlug = async () => {
@@ -49,14 +59,35 @@ export default function GalleriesDetailPage({
             <span className="absolute left-0 right-0 bottom-0 h-full bg-gradient-to-t from-zinc-900 via-zinc-800 to-zinc-900"></span>
           </div>
           <h1 className="mt-8 text-base font-bold uppercase tracking-widest z-10">
-            {gallery.created_at}
+            {formatDate(gallery.created_at)}
           </h1>
           <p className="max-w-[40ch] text-white/75 z-10 sm:max-w-[32ch]">
             {gallery.title}
           </p>
-          <Button className="z-10" variant="secondary">
-            Bagikan
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              className="z-10"
+              onClick={() => route.replace("/galleries")}
+            >
+              Kembali
+            </Button>
+            {!isLinkCopied ? (
+              <Button
+                className="z-10"
+                variant="secondary"
+                onClick={() => copyLinkAddress()}
+              >
+                <Icons.link className="w-4 h-4 mr-2" />
+                Bagikan
+              </Button>
+            ) : (
+              <Button className="z-10" variant="secondary">
+                <Icons.check className="w-4 h-4 mr-2" />
+                Link berhasil disalin
+              </Button>
+            )}
+          </div>
         </div>
         {gallery.media.map((media, index) => (
           <Link

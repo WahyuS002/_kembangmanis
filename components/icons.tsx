@@ -17,6 +17,8 @@ import {
   X,
   Instagram,
   MapPin,
+  Link,
+  Check,
 } from "lucide-react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -73,4 +75,6 @@ export const Icons = {
   x: X,
   instagram: Instagram,
   mapPin: MapPin,
+  link: Link,
+  check: Check,
 };

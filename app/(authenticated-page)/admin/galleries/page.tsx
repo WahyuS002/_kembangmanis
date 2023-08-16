@@ -9,7 +9,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import PaginationControls from "@/components/ui/pagination-controls";
-import GalleryCard from "@/components/ui/gallery-card";
+import AdminGalleryCard from "@/components/ui/admin-gallery-card";
 
 export default function AdminGalleriesPage() {
   const [galleries, setGalleries] = useState<Gallery[]>([]);
@@ -48,7 +48,7 @@ export default function AdminGalleriesPage() {
       </div>
       <section className="mt-4 grid lg:grid-cols-4 gap-5">
         {galleries.map((gallery, index) => (
-          <GalleryCard gallery={gallery} key={index} />
+          <AdminGalleryCard gallery={gallery} key={index} />
         ))}
       </section>
       <PaginationControls
