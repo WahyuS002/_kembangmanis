@@ -39,16 +39,7 @@ export default function LoginPage() {
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      login({
-        email,
-        password,
-        setErrors,
-      });
-      toast.success("Berhasil masuk");
-    } catch (error) {
-      toast.error("Gagal masuk");
-    }
+    toast.error("Email atau password salah");
   };
 
   return (

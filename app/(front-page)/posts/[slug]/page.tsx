@@ -1,7 +1,7 @@
 "use client";
 
 import { TypographyH1 } from "@/components/ui/typography";
-import axios from "@/lib/axios";
+import axios from "axios";
 import { Post } from "@/store/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -16,8 +16,11 @@ export default function PostDetailPage({
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const { data } = await axios.get(`/api/posts/${params.slug}`);
-        setPost(data);
+        const { data } = await axios.get(`/api/posts`);
+        const foundPost = data.data.find(
+          (post: Post) => post.slug === params.slug
+        );
+        setPost(foundPost);
       } catch (error) {
         console.log(error);
       }

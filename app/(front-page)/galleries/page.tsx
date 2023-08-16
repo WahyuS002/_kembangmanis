@@ -3,7 +3,7 @@
 import GalleryCard from "@/components/ui/gallery-card";
 import PaginationControls from "@/components/ui/pagination-controls";
 import { TypographyH1 } from "@/components/ui/typography";
-import axios from "@/lib/axios";
+import axios from "axios";
 import { MetaData } from "@/store/types";
 import { useEffect, useState } from "react";
 

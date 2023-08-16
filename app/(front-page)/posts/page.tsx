@@ -3,18 +3,21 @@
 import PaginationControls from "@/components/ui/pagination-controls";
 import PostCard from "@/components/ui/post/post-card";
 import { TypographyH1 } from "@/components/ui/typography";
-import axios from "@/lib/axios";
-import { MetaData, Post } from "@/store/types";
+import { Post } from "@/store/types";
+import axios from "axios";
 import { useEffect, useState } from "react";
+// import axios from "@/lib/axios";
+// import { MetaData, Post } from "@/store/types";
+// import { useEffect, useState } from "react";
 
 export default function PostPage() {
   const [posts, setPosts] = useState<Post[]>();
-  const [pagination, setPagination] = useState<MetaData>({
-    currentPage: 1,
-    totalPages: 1,
-    prevPageUrl: false,
-    nextPageUrl: false,
-  });
+  // const [pagination, setPagination] = useState<MetaData>({
+  //   currentPage: 1,
+  //   totalPages: 1,
+  //   prevPageUrl: false,
+  //   nextPageUrl: false,
+  // });
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -22,7 +25,7 @@ export default function PostPage() {
       try {
         const response = await axios.get(`/api/posts?page=${currentPage}`);
         setPosts(response.data.data);
-        setPagination(response.data.meta);
+        // setPagination(response.data.meta);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -48,10 +51,10 @@ export default function PostPage() {
           />
         ))}
       </section>
-      <PaginationControls
+      {/* <PaginationControls
         pagination={pagination}
         setCurrentPage={setCurrentPage}
-      />
+      /> */}
     </div>
   );
 }
