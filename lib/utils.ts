@@ -66,34 +66,34 @@ export const animationVariants = {
   },
 };
 
-function forceDownload(blobUrl: string, filename: string) {
-  let a: any = document.createElement("a");
-  a.download = filename;
-  a.href = blobUrl;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
+// function forceDownload(blobUrl: string, filename: string) {
+//   let a: any = document.createElement("a");
+//   a.download = filename;
+//   a.href = blobUrl;
+//   document.body.appendChild(a);
+//   a.click();
+//   a.remove();
+// }
 
-export function downloadPhoto(url: string, filename: string | undefined) {
-  if (!filename && url) {
-    filename = url.split("\\").pop()?.split("/").pop();
-  }
-  fetch(url, {
-    headers: new Headers({
-      Origin: location.origin,
-    }),
-    mode: "cors",
-  })
-    .then((response) => response.blob())
-    .then((blob) => {
-      let blobUrl = window.URL.createObjectURL(blob);
-      if (filename) {
-        forceDownload(blobUrl, filename);
-      }
-    })
-    .catch((e) => console.error(e));
-}
+// export function downloadPhoto(url: string, filename: string | undefined) {
+//   if (!filename && url) {
+//     filename = url.split("\\").pop()?.split("/").pop();
+//   }
+//   fetch(url, {
+//     headers: new Headers({
+//       Origin: location.origin,
+//     }),
+//     mode: "cors",
+//   })
+//     .then((response) => response.blob())
+//     .then((blob) => {
+//       let blobUrl = window.URL.createObjectURL(blob);
+//       if (filename) {
+//         forceDownload(blobUrl, filename);
+//       }
+//     })
+//     .catch((e) => console.error(e));
+// }
 
 export const range = (start: number, end: number) => {
   let output = [];
