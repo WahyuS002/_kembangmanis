@@ -31,12 +31,14 @@ export default function PostDetailPage({
       <TypographyH1 className="text-center mb-10">{post?.title}</TypographyH1>
       {post && (
         <div className="flex justify-center">
-          <Image
-            width={1080}
-            height={500}
-            src={post.media[0].original_url}
-            alt={post.title}
-          />
+          {post.media && (
+            <Image
+              width={1080}
+              height={500}
+              src={post.media[0].original_url}
+              alt={post.title}
+            />
+          )}
         </div>
       )}
       <div className="mt-10">{post?.content}</div>
