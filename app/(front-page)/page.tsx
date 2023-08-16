@@ -55,26 +55,26 @@ export default function HomePage() {
       </main>
       <section className="pt-20 container mx-auto lg:pt-40">
         <TypographyH2>Infografis Desa</TypographyH2>
-        <div className="grid grid-cols-4 mt-10">
-          <div className="h-[15rem] aspect-square rounded-xl shadow-sm border-2 flex items-center justify-center">
+        <div className="grid lg:grid-cols-4 mt-10 gap-4 lg:gap-0">
+          <div className="lg:h-[15rem] aspect-square rounded-xl shadow-sm border-2 flex items-center justify-center">
             <div>
               <div className="text-center font-semibold text-xl">304</div>
               <p>Jumlah KK</p>
             </div>
           </div>
-          <div className="h-[15rem] aspect-square rounded-xl shadow-sm border-2 flex items-center justify-center">
+          <div className="lg:h-[15rem] aspect-square rounded-xl shadow-sm border-2 flex items-center justify-center">
             <div>
               <div className="text-center font-semibold text-xl">510</div>
               <p>Laki-laki</p>
             </div>
           </div>
-          <div className="h-[15rem] aspect-square rounded-xl shadow-sm border-2 flex items-center justify-center">
+          <div className="lg:h-[15rem] aspect-square rounded-xl shadow-sm border-2 flex items-center justify-center">
             <div>
               <div className="text-center font-semibold text-xl">480</div>
               <p>Perempuan</p>
             </div>
           </div>
-          <div className="h-[15rem] aspect-square rounded-xl shadow-sm border-2 flex items-center justify-center">
+          <div className="lg:h-[15rem] aspect-square rounded-xl shadow-sm border-2 flex items-center justify-center">
             <div>
               <div className="text-center font-semibold text-xl">990</div>
               <p>Total Jiwa</p>
@@ -83,12 +83,12 @@ export default function HomePage() {
         </div>
       </section>
       <section className="pt-20 container mx-auto lg:pt-40">
-        <div className="gap-12 items-center lg:flex">
+        <div className="flex gap-12 items-center flex-col-reverse lg:flex-row">
           <Dialog>
             <DialogTrigger asChild>
               <div className="h-[30rem] relative rounded-xl overflow-hidden cursor-pointer lg:w-1/2">
                 <Image
-                  className="relative z-10 w-full"
+                  className="relative z-10 w-full h-full object-cover"
                   src={posbinduImg}
                   alt="posbindu"
                 />
@@ -135,7 +135,7 @@ export default function HomePage() {
         <div className="justify-center lg:flex">
           <TypographyH2>Berita Terbaru</TypographyH2>
         </div>
-        <div className="mt-10 grid gap-10 container md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
+        <div className="mt-10 grid gap-10 lg:container md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
           {posts?.map((post, index) => (
             <PostCard
               title={post.title}

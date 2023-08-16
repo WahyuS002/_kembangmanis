@@ -34,7 +34,7 @@ export default function Footer() {
         <div className="flex flex-col justify-between lg:flex-row">
           <div className="flex flex-col text-xs items-center sm:flex-row sm:space-x-5">
             <span>Copyright © 2023 KKN 215, Inc. All rights reserved.</span>
-            <div className="flex space-x-4 lg:space-x-7 mt-3 sm:mt-0">
+            <div className="flex space-x-4 lg:space-x-3 mt-3 sm:mt-0">
               <Link
                 href="https://www.instagram.com/desa.kembang.manis/"
                 target="_blank"
@@ -42,6 +42,14 @@ export default function Footer() {
                 className="font-bold"
               >
                 <Icons.instagram className="w-5 h-5" />
+              </Link>
+              <Link
+                href="https://www.facebook.com/profile.php?id=100073082875856"
+                target="_blank"
+                rel="noreferrer"
+                className="font-bold"
+              >
+                <Icons.facebook className="w-5 h-5" />
               </Link>
             </div>
           </div>
