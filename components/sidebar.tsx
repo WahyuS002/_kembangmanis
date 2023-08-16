@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 import { Separator } from "./ui/separator";
+import { useAuth } from "@/hooks/auth";
 
 const items = [
   // {
@@ -44,6 +45,7 @@ export function Sidebar({
   setIsMenuOpen: (value: boolean) => void;
 }) {
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   const isLinkActive = (link: string) => {
     // Check if the current route matches the link
@@ -90,12 +92,14 @@ export function Sidebar({
                 <span className="capitalize">Konfigurasi Website</span>
               </Button>
             </Link> */}
-            <Link href="#logout" className="flex items-center">
-              <Button variant="ghost" className="w-full justify-start">
-                <Icons.logOut className="h-4 w-4 mr-2" />
-                <span className="capitalize">Log Out</span>
-              </Button>
-            </Link>
+            <Button
+              variant="ghost"
+              className="w-full justify-start"
+              onClick={() => logout()}
+            >
+              <Icons.logOut className="h-4 w-4 mr-2" />
+              <span className="capitalize">Log Out</span>
+            </Button>
           </div>
         </div>
       </div>
