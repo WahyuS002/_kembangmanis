@@ -2,7 +2,7 @@
 
 import PostCard from "@/components/ui/post/post-card";
 import { TypographyH1, TypographyH2 } from "@/components/ui/typography";
-import axios from "@/lib/axios";
+import axios from "axios";
 import kantorDesaImg from "@/public/images/kantor-desa.png";
 import { MetaData, Post } from "@/store/types";
 import Image from "next/image";
