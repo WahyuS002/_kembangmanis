@@ -3,7 +3,7 @@
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import Modal from "@/components/ui/modal";
-import axios from "@/lib/axios";
+import axios from "axios";
 import { delay, formatDate } from "@/lib/utils";
 import { Gallery } from "@/store/types";
 import Image from "next/image";
@@ -38,8 +38,11 @@ export default function GalleriesDetailPage({
   useEffect(() => {
     const fetchGalleryBySlug = async () => {
       try {
-        const { data } = await axios.get(`/api/galleries/${params.slug}`);
-        setGallery(data);
+        const { data } = await axios.get(`/api/galleries`);
+        const foundGallery = data.data.find(
+          (gallery: Gallery) => gallery.slug === params.slug
+        );
+        setGallery(foundGallery);
       } catch (error: any) {
         console.log(error);
       }
