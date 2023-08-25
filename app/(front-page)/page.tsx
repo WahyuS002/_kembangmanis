@@ -111,7 +111,7 @@ export default function HomePage() {
                 </div>
               </div>
             </DialogTrigger>
-            <DialogContent className="min-w-[45rem]">
+            <DialogContent className="max-w-[20rem] lg:min-w-[45rem]">
               <DialogHeader>
                 <DialogTitle>Video Profile Desa Kembang Manis</DialogTitle>
               </DialogHeader>
